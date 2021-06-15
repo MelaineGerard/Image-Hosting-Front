@@ -31,7 +31,9 @@ app.get('/:uuid', function (req, res) {
       res.redirect(config['redirect_url'])
     })
 })
-
+app.route('*').all((req, res) => {
+  res.redirect(config['redirect_url'])
+})
 app.listen(config['port'], () => {
   console.log(`Server started on port ${config['port']}`)
 })
