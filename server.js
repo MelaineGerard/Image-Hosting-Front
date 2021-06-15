@@ -17,13 +17,17 @@ app.get('/:uuid', function (req, res) {
   let image
    axios.get(`${config['api']}/images/${uuid}`)
     .then(function (response) {
+      if(response.data.length !== 0){
         console.log(response.data)
         res.render('image', response.data)
         return
+      }
     })
     .catch(function (error) {
-      res.redirect(config['redirect_url'])
+      console.error(error)
     })
+    
+    res.redirect(config['redirect_url'])
 })
 
 app.listen(config['port'], () => {
